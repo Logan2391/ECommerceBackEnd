@@ -8,10 +8,10 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const findAllTags = await Tag.findAll({
-      include: [{ model: Product }, { modal: ProductTag }],
+      include: [{ model: Product }],
     });
     res.status(200).json(findAllTags);
-  } catch {
+  } catch (err) {
     res.status(500).json(err.message);
   }
 });
@@ -21,10 +21,10 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const findOneTag = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product }, { modal: ProductTag }],
+      include: [{ model: Product }],
     });
     res.status(200).json(findOneTag);
-  } catch {
+  } catch (err) {
     res.status(500).json(err.message);
   }
 });
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   try {
     const newTag = await Tag.create(req.body);
     res.status(200).json(newTag);
-  } catch {
+  } catch (err) {
     res.status(500).json(err.message);
   }
 });
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
     );
 
     res.status(200).json(updatedTag);
-  } catch {
+  } catch (err) {
     res.status(500).json(err.message);
   }
 });
